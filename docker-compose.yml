@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "$PORT:$PORT"
+      - "$DEBUG_PORT:$DEBUG_PORT"
+    environment:
+      NODE_ENV: $NODE_ENV
+      PORT: $PORT
+      DEBUG_PORT: $DEBUG_PORT
+      HOST: $HOST
+      PROTOCOL: $PROTOCOL
+      CERT: $CERT
+      KEY: $KEY
+      DB_HOST: $DB_HOST
+      DB_PORT: $DB_PORT
+      DB_USER: $DB_USER
+      DB_PASSWORD: $DB_PASSWORD
+      DB_NAME: $DB_NAME
+    depends_on:
+      - db
+
+  db:
+    image: postgres:latest
+    ports:
+      - "$DB_PORT:$DB_PORT"
+    environment:
+      POSTGRES_USER: $DB_USER
+      POSTGRES_PASSWORD: $DB_PASSWORD
+      POSTGRES_DB: $DB_NAME
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
