@@ -7,7 +7,7 @@ function errorHandling(
   req: Request,
   res: Response,
   next: NextFunction
-) {
+): void {
   if (error) {
     const { headers, body } = req
     logger.error('%j', { error, request: { headers, body } })

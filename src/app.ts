@@ -1,11 +1,11 @@
 import express from 'express'
 
 import routes from './routes'
-import auth from './auth'
 import errorHandling from './middlewares/error-handling'
+import authInitialize from './middlewares/auth-initialize'
 
 const app = express()
-app.use(auth.initialize())
+app.use(authInitialize)
 app.use(routes)
 app.use(errorHandling)
 
