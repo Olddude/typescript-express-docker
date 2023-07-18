@@ -1,11 +1,14 @@
 import { Router } from 'express'
 import db from '../db'
 import authAuthentificate from '../middlewares/auth-authentificate'
+import logger from '../logger'
+import config from '../config'
 
 const routes = Router()
 
 routes.get('/setup', async (req, res, next) => {
   try {
+    logger.info(`%j`, config)
     await db.migrate.latest()
     res.json({ message: 'success' })
   } catch (error) {

@@ -6,11 +6,11 @@ const config = {
   protocol: process.env.PROTOCOL || 'https',
   cert: process.env.CERT || 'certificate.crt',
   key: process.env.KEY || 'private.key',
-  dbHost: process.env.DB_HOST || 'localhost',
+  dbHost: process.env.DB_HOST || 'resource-db',
   dbPort: process.env.DB_PORT || '5432',
   dbUser: process.env.DB_USER || 'postgres',
   dbPassword: process.env.DB_PASSWORD || 'postgres',
-  dbName: process.env.DB_NAME || 'mydatabase',
+  dbName: process.env.DB_NAME || 'resource-db',
 }
 
 export default config
