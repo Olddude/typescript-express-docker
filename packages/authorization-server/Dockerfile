@@ -13,4 +13,4 @@ RUN yarn install --frozen-lockfile --production
 COPY cert.conf ./
 RUN yarn cert
 COPY --from=builder /app/dist ./dist
-CMD node --inspect=0.0.0.0:9230 ./dist/index.js
+CMD node --inspect=0.0.0.0:9229 ./dist/index.js

@@ -6,32 +6,32 @@ services:
       context: ./packages/authorization-server
       dockerfile: Dockerfile
     ports:
-      - "$AUTHORIZATION_PORT:$AUTHORIZATION_PORT"
-      - "$AUTHORIZATION_DEBUG_PORT:$AUTHORIZATION_DEBUG_PORT"
+      - "8001:8000"
+      - "9230:9229"
     environment:
-      NODE_ENV: $NODE_ENV
-      PORT: $AUTHORIZATION_PORT
-      DEBUG_PORT: $AUTHORIZATION_DEBUG_PORT
-      HOST: $AUTHORIZATION_HOST
-      PROTOCOL: $AUTHORIZATION_PROTOCOL
-      CERT: $AUTHORIZATION_CERT
-      KEY: $AUTHORIZATION_KEY
-      DB_HOST: $AUTHORIZATION_DB_HOST
-      DB_PORT: $AUTHORIZATION_DB_PORT
-      DB_USER: $AUTHORIZATION_DB_USER
-      DB_PASSWORD: $AUTHORIZATION_DB_PASSWORD
-      DB_NAME: $AUTHORIZATION_DB_NAME
+      NODE_ENV: development
+      PORT: 8000
+      DEBUG_PORT: 9229
+      HOST: localhost
+      PROTOCOL: https
+      CERT: certificate.crt
+      KEY: private.key
+      DB_HOST: authorization-db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: authorization-db
     depends_on:
       - authorization-db
 
   authorization-db:
     image: postgres:latest
     ports:
-      - "$AUTHORIZATION_DB_PORT:5432"
+      - "5433:5432"
     environment:
-      POSTGRES_USER: $AUTHORIZATION_DB_USER
-      POSTGRES_PASSWORD: $AUTHORIZATION_DB_PASSWORD
-      POSTGRES_DB: $AUTHORIZATION_DB_NAME
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: authorization-db
     volumes:
       - authorization_data:/var/lib/postgresql/data
 
@@ -40,32 +40,32 @@ services:
       context: ./packages/resource-server
       dockerfile: Dockerfile
     ports:
-      - "$RESOURCE_PORT:$RESOURCE_PORT"
-      - "$RESOURCE_DEBUG_PORT:$RESOURCE_DEBUG_PORT"
+      - "8000:8000"
+      - "9229:9229"
     environment:
-      NODE_ENV: $NODE_ENV
-      PORT: $RESOURCE_PORT
-      DEBUG_PORT: $RESOURCE_DEBUG_PORT
-      HOST: $RESOURCE_HOST
-      PROTOCOL: $RESOURCE_PROTOCOL
-      CERT: $RESOURCE_CERT
-      KEY: $RESOURCE_KEY
-      DB_HOST: $RESOURCE_DB_HOST
-      DB_PORT: $RESOURCE_DB_PORT
-      DB_USER: $RESOURCE_DB_USER
-      DB_PASSWORD: $RESOURCE_DB_PASSWORD
-      DB_NAME: $RESOURCE_DB_NAME
+      NODE_ENV: development
+      PORT: 8000
+      DEBUG_PORT: 9229
+      HOST: localhost
+      PROTOCOL: https
+      CERT: certificate.crt
+      KEY: private.key
+      DB_HOST: resource-db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_NAME: resource-db
     depends_on:
       - resource-db
 
   resource-db:
     image: postgres:latest
     ports:
-      - "$RESOURCE_DB_PORT:5432"
+      - "5432:5432"
     environment:
-      POSTGRES_USER: $RESOURCE_DB_USER
-      POSTGRES_PASSWORD: $RESOURCE_DB_PASSWORD
-      POSTGRES_DB: $RESOURCE_DB_NAME
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: resource-db
     volumes:
       - resource_data:/var/lib/postgresql/data
 
