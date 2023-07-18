@@ -4,8 +4,13 @@
   "repository": "https://github.com/Olddude/typescript-express-docker.git",
   "author": "Konstantin Novikov <nov.konstantin@gmail.com>",
   "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "lint": "eslint .",
+    "setup": "lerna exec yarn --concurrency 1",
+    "build": "lerna exec --concurrency 1 -- yarn build",
     "up": "docker-compose up --build",
     "down": "docker-compose down --rmi local",
     "start": "nodemon"
@@ -17,6 +22,8 @@
     "eslint": "^8.42.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "lerna": "^7.1.4",
+    "nodemon": "^2.0.22",
     "prettier": "^2.8.8",
     "typescript": "5.0.3"
   }

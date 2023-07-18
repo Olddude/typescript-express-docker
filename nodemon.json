@@ -5,7 +5,7 @@
   ],
   "ext": "ts",
   "ignore": ["**/*.spec.ts"],
-  "exec": "yarn install --frozen-lockfile && yarn build && yarn down && yarn up",
+  "exec": "yarn install --frozen-lockfile && yarn setup && yarn build && yarn down && yarn up",
   "inspect": true,
   "verbose": true
 }
