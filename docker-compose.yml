@@ -11,7 +11,7 @@ services:
     environment:
       NODE_ENV: $NODE_ENV
       PORT: $AUTHORIZATION_PORT
-      DEBUG_PORT: $AUTHORIZATION_PORT
+      DEBUG_PORT: $AUTHORIZATION_DEBUG_PORT
       HOST: $AUTHORIZATION_HOST
       PROTOCOL: $AUTHORIZATION_PROTOCOL
       CERT: $AUTHORIZATION_CERT
@@ -27,7 +27,7 @@ services:
   authorization-db:
     image: postgres:latest
     ports:
-      - "$AUTHORIZATION_DB_PORT:$AUTHORIZATION_DB_PORT"
+      - "$AUTHORIZATION_DB_PORT:5432"
     environment:
       POSTGRES_USER: $AUTHORIZATION_DB_USER
       POSTGRES_PASSWORD: $AUTHORIZATION_DB_PASSWORD
@@ -61,7 +61,7 @@ services:
   resource-db:
     image: postgres:latest
     ports:
-      - "$RESOURCE_DB_PORT:$RESOURCE_DB_PORT"
+      - "$RESOURCE_DB_PORT:5432"
     environment:
       POSTGRES_USER: $RESOURCE_DB_USER
       POSTGRES_PASSWORD: $RESOURCE_DB_PASSWORD
