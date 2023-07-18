@@ -7,15 +7,10 @@
     "node": ">=18"
   },
   "scripts": {
-    "clean": "git clean -X -d -f",
     "cert": "openssl req -newkey rsa:2048 -nodes -keyout private.key -x509 -days 365 -out certificate.crt -config cert.conf",
     "test": "jest --coverage",
     "prebuild": "rm -rf dist",
-    "build": "tsc --project tsconfig.app.json --sourceMap",
-    "lint": "eslint src/**",
-    "up": "docker-compose up --build",
-    "down": "docker-compose down --rmi local",
-    "start": "nodemon"
+    "build": "tsc --project tsconfig.app.json --sourceMap"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
