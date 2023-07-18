@@ -1,8 +1,5 @@
 {
-  "watch": [
-    "packages/authorization-server/src",
-    "packages/resource-server/src"
-  ],
+  "watch": ["src"],
   "ext": "ts",
   "ignore": ["**/*.spec.ts"],
   "exec": "yarn install --frozen-lockfile && yarn build && yarn down && yarn up",

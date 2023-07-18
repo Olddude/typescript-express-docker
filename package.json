@@ -1,57 +1,23 @@
 {
   "name": "typescript-express-docker",
   "version": "1.0.0",
-  "main": "./src/index.ts",
+  "repository": "https://github.com/Olddude/typescript-express-docker.git",
+  "author": "Konstantin Novikov <nov.konstantin@gmail.com>",
   "license": "MIT",
-  "engines": {
-    "node": ">=18"
-  },
   "scripts": {
-    "clean": "git clean -X -d -f",
-    "cert": "openssl req -newkey rsa:2048 -nodes -keyout private.key -x509 -days 365 -out certificate.crt -config cert.conf",
-    "test": "jest --coverage",
-    "prebuild": "rm -rf dist",
-    "build": "tsc --project tsconfig.app.json --sourceMap",
-    "lint": "eslint src/**",
+    "lint": "eslint .",
     "up": "docker-compose up --build",
     "down": "docker-compose down --rmi local",
     "start": "nodemon"
   },
-  "dependencies": {
-    "bcrypt": "^5.1.0",
-    "express": "^4.18.2",
-    "jwks-rsa": "^3.0.1",
-    "knex": "^2.4.2",
-    "log4js": "^6.9.1",
-    "nock": "^13.3.1",
-    "passport": "^0.6.0",
-    "passport-http": "^0.3.0",
-    "passport-jwt": "^4.0.1",
-    "pg": "^8.11.0",
-    "uuid": "^9.0.0"
-  },
   "devDependencies": {
-    "@types/bcrypt": "^5.0.0",
-    "@types/express": "^4.17.17",
-    "@types/jest": "^29.5.2",
     "@types/node": "^18.15.0",
-    "@types/passport": "^1.0.12",
-    "@types/passport-http": "^0.3.9",
-    "@types/passport-jwt": "^3.0.9",
-    "@types/supertest": "^2.0.12",
-    "@types/uuid": "^9.0.2",
     "@typescript-eslint/eslint-plugin": "^5.59.11",
     "@typescript-eslint/parser": "^5.59.11",
-    "dotenv": "^16.1.4",
     "eslint": "^8.42.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "jest": "^29.5.0",
-    "nodemon": "^2.0.22",
     "prettier": "^2.8.8",
-    "supertest": "^6.3.3",
-    "ts-jest": "^29.1.0",
-    "ts-node": "^10.9.1",
     "typescript": "5.0.3"
   }
 }

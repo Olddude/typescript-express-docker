@@ -1,39 +1,74 @@
 version: "3.8"
 
 services:
-  app:
+  authorization-server:
     build:
-      context: .
+      context: ./packages/authorization-server
       dockerfile: Dockerfile
     ports:
-      - "$PORT:$PORT"
-      - "$DEBUG_PORT:$DEBUG_PORT"
+      - "$AUTHORIZATION_PORT:$AUTHORIZATION_PORT"
+      - "$AUTHORIZATION_DEBUG_PORT:$AUTHORIZATION_DEBUG_PORT"
     environment:
       NODE_ENV: $NODE_ENV
-      PORT: $PORT
-      DEBUG_PORT: $DEBUG_PORT
-      HOST: $HOST
-      PROTOCOL: $PROTOCOL
-      CERT: $CERT
-      KEY: $KEY
-      DB_HOST: $DB_HOST
-      DB_PORT: $DB_PORT
-      DB_USER: $DB_USER
-      DB_PASSWORD: $DB_PASSWORD
-      DB_NAME: $DB_NAME
+      PORT: $AUTHORIZATION_PORT
+      DEBUG_PORT: $AUTHORIZATION_PORT
+      HOST: $AUTHORIZATION_HOST
+      PROTOCOL: $AUTHORIZATION_PROTOCOL
+      CERT: $AUTHORIZATION_CERT
+      KEY: $AUTHORIZATION_KEY
+      DB_HOST: $AUTHORIZATION_DB_HOST
+      DB_PORT: $AUTHORIZATION_DB_PORT
+      DB_USER: $AUTHORIZATION_DB_USER
+      DB_PASSWORD: $AUTHORIZATION_DB_PASSWORD
+      DB_NAME: $AUTHORIZATION_DB_NAME
     depends_on:
-      - db
+      - authorization-db
 
-  db:
+  authorization-db:
     image: postgres:latest
     ports:
-      - "$DB_PORT:$DB_PORT"
+      - "$AUTHORIZATION_DB_PORT:$AUTHORIZATION_DB_PORT"
     environment:
-      POSTGRES_USER: $DB_USER
-      POSTGRES_PASSWORD: $DB_PASSWORD
-      POSTGRES_DB: $DB_NAME
+      POSTGRES_USER: $AUTHORIZATION_DB_USER
+      POSTGRES_PASSWORD: $AUTHORIZATION_DB_PASSWORD
+      POSTGRES_DB: $AUTHORIZATION_DB_NAME
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - authorization_data:/var/lib/postgresql/data
+
+  resource-server:
+    build:
+      context: ./packages/resource-server
+      dockerfile: Dockerfile
+    ports:
+      - "$RESOURCE_PORT:$RESOURCE_PORT"
+      - "$RESOURCE_DEBUG_PORT:$RESOURCE_DEBUG_PORT"
+    environment:
+      NODE_ENV: $NODE_ENV
+      PORT: $RESOURCE_PORT
+      DEBUG_PORT: $RESOURCE_DEBUG_PORT
+      HOST: $RESOURCE_HOST
+      PROTOCOL: $RESOURCE_PROTOCOL
+      CERT: $RESOURCE_CERT
+      KEY: $RESOURCE_KEY
+      DB_HOST: $RESOURCE_DB_HOST
+      DB_PORT: $RESOURCE_DB_PORT
+      DB_USER: $RESOURCE_DB_USER
+      DB_PASSWORD: $RESOURCE_DB_PASSWORD
+      DB_NAME: $RESOURCE_DB_NAME
+    depends_on:
+      - resource-db
+
+  resource-db:
+    image: postgres:latest
+    ports:
+      - "$RESOURCE_DB_PORT:$RESOURCE_DB_PORT"
+    environment:
+      POSTGRES_USER: $RESOURCE_DB_USER
+      POSTGRES_PASSWORD: $RESOURCE_DB_PASSWORD
+      POSTGRES_DB: $RESOURCE_DB_NAME
+    volumes:
+      - resource_data:/var/lib/postgresql/data
 
 volumes:
-  postgres_data:
+  resource_data:
+  authorization_data:

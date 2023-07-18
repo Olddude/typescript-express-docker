@@ -1,0 +1,8 @@
+node_modules/
+coverage/
+dist/
+
+.env
+certificate.crt
+private.key
+yarn-error.log

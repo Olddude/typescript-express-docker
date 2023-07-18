@@ -2,12 +2,21 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug",
+      "name": "Debug-Resource-Server",
       "type": "node",
       "request": "attach",
       "port": 9229,
       "address": "localhost",
-      "localRoot": "${workspaceFolder}",
+      "localRoot": "${workspaceFolder}/packages/resource-server",
+      "remoteRoot": "/app"
+    },
+    {
+      "name": "Debug-Authorization-Server",
+      "type": "node",
+      "request": "attach",
+      "port": 9230,
+      "address": "localhost",
+      "localRoot": "${workspaceFolder}/packages/authorization-server",
       "remoteRoot": "/app"
     }
   ]
