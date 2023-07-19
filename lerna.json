@@ -1,6 +1,10 @@
 {
   "lerna": "7.1.4",
   "npmClient": "yarn",
-  "packages": ["packages/authorization-server", "packages/resource-server"],
+  "packages": [
+    "packages/server-base",
+    "packages/authorization-server",
+    "packages/resource-server"
+  ],
   "version": "independent"
 }
